@@ -2,7 +2,7 @@ import Buff       from './buff/shootBigger'
 import DataBus    from './databus'
 import Player1    from './player1/index'
 import Player2    from './player2/index'
-// import Stone      from './stone/index'
+import Stone      from './stone/index'
 
 let ctx = canvas.getContext('2d');
 let databus = new DataBus();
@@ -27,7 +27,8 @@ export default class Main{
         )
         this.player1 = new Player1();
         this.player2 = new Player2();
-        // this.stone   = new Stone();   
+        this.stone   = new Stone();  
+        console.log(this.player1.__proto__.constructor.name) 
     }
 
     //游戏结束后的触摸事件
@@ -47,6 +48,17 @@ export default class Main{
         }
     }
 
+    //碰撞
+    collisionDetection(){
+        if(this.stone.isCollideWith(this.player1)){
+            console.log('boom')
+            this.stone.x += 10;
+        } else if (this.stone.isCollideWith(this.player2)){
+            this.stone.x -= 10
+        }
+    }
+
+
     /**
      * canvas重绘函数
      * 每一帧重新绘制所有的需要展示的元素
@@ -57,15 +69,22 @@ export default class Main{
 
         this.player1.drawToCanvas(ctx)
         this.player2.drawToCanvas(ctx)
-        // this.stone.drawToCanvas(ctx)      
+        this.stone.drawToCanvas(ctx)      
     }
 
     //游戏逻辑数据更新
     update() {
-        this.player1.update();
-        this.player2.update();
+        if(this.player1.y>this.stone.y-this.player1.height&&this.player1.y<this.stone.y+this.stone.height){
+            this.player1.update(this.stone);
+            this.player2.update(this.stone);
+        } else {
+            this.player1.update();
+            this.player2.update();
+        }
+        
 
         //碰撞检测
+        this.collisionDetection()
     }
 
     loop() {

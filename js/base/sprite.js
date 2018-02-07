@@ -34,14 +34,17 @@ export default class Sprite {
   /**
    * 简单的碰撞检测定义：
    * 另一个精灵的中心点处于本精灵所在的矩形内即可
-   * @param{Sprite} sp: Sptite的实例
+   * @param{Sprite} sp: Sprite的实例
    */
   isCollideWith(sp) {
     let spX = sp.x + sp.width / 2
     let spY = sp.y + sp.height / 2
-
-    if ( !this.visible || !sp.visible )
+    
+    if ( !this.visible || !sp.visible ){
+      console.log('false');
       return false
+    }
+      
 
     return !!(   spX >= this.x
               && spX <= this.x + this.width

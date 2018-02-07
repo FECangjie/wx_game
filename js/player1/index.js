@@ -25,7 +25,7 @@ export default class Player extends Sprite{
     //
     initEvent(){
         canvas.addEventListener('touchstart',(e => {
-            console.log(e)
+            
             if (e.touches[0].clientX < screenWidth/2) {
                 this.touched = true
             }
@@ -33,8 +33,13 @@ export default class Player extends Sprite{
         }).bind(this))
     }
 
-    update () {
-        
+    /**
+     * 
+     * @param {*Sprite} sp 
+     */
+    update (sp = {x:screenWidth / 2 - 25}) {
+        // console.log(sp)
+        const STONE_X = sp.x;
         if (!this.touched){
             if(this.motion){
                 if(this.y > window.innerHeight-this.height) {
@@ -59,7 +64,8 @@ export default class Player extends Sprite{
                 }
             }else {
                 this.x += 9
-                if(this.x>200){
+
+                if(this.x+this.width/2>STONE_X){
                     this.meet =true;
                 }
             }

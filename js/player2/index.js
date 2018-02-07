@@ -33,8 +33,8 @@ export default class Player extends Sprite{
         }).bind(this))
     }
 
-    update () {
-        
+    update (sp = {x:screenWidth / 2 - 25}) {
+        const STONE_X = sp.x
         if (!this.touched){
             if(this.motion){
                 if(this.y > window.innerHeight-this.height) {
@@ -59,7 +59,7 @@ export default class Player extends Sprite{
                 }
             }else {
                 this.x -= 8
-                if(this.x<screenWidth-290){
+                if(this.x<STONE_X){
                     this.meet =true;
                 }
             }
