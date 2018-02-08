@@ -16,8 +16,8 @@ export default class GameInfo {
     )
   }
 
-  renderGameOver(ctx, score) {
-    ctx.drawImage(atlas, 0, 0, 119, 108, screenWidth / 2 - 150, screenHeight / 2 - 100, 300, 300)
+  renderGameOver(ctx, winner) {
+    ctx.drawImage(atlas, 0, 0, 119, 108, screenWidth / 2 - 150, screenHeight / 2 - 150, 300, 300)
 
     ctx.fillStyle = "#ffffff"
     ctx.font    = "20px Arial"
@@ -25,13 +25,13 @@ export default class GameInfo {
     ctx.fillText(
       '游戏结束',
       screenWidth / 2 - 40,
-      screenHeight / 2 - 100 + 50
+      screenHeight / 2 - 150 + 50
     )
 
     ctx.fillText(
-      '得分: ' + score,
-      screenWidth / 2 - 40,
-      screenHeight / 2 - 100 + 130
+      `${winner} 获得了凤姐`,
+      screenWidth / 2 - 80,
+      screenHeight / 2 - 150 + 130
     )
 
     ctx.drawImage(
@@ -60,4 +60,3 @@ export default class GameInfo {
     }
   }
 }
-

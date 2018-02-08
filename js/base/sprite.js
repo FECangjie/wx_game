@@ -39,12 +39,11 @@ export default class Sprite {
   isCollideWith(sp) {
     let spX = sp.x + sp.width / 2
     let spY = sp.y + sp.height / 2
-    
+
     if ( !this.visible || !sp.visible ){
-      console.log('false');
       return false
     }
-      
+
 
     return !!(   spX >= this.x
               && spX <= this.x + this.width
